@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
             anim.SetTrigger("doReload");
             isReload = true;
             reloadSound.Play();
-            Invoke("ReloadOut", 2.55f);
+            Invoke("ReloadOut", 2.3f);
         }
 
     }

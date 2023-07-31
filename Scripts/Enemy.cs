@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
         meshs = GetComponentsInChildren<MeshRenderer>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+        enemyHitSound = GetComponentInChildren<AudioSource>();
 
         if(enemyType != Type.D)
             Invoke("ChaseStart", 2);
@@ -182,7 +183,6 @@ public class Enemy : MonoBehaviour
         {
             if(type == "Melee")
             {
-                Debug.Log("attack");
                 reactVec = reactVec.normalized;
                 reactVec += Vector3.up;
                 rigid.AddForce(reactVec * 15, ForceMode.Impulse);
@@ -191,7 +191,7 @@ public class Enemy : MonoBehaviour
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.white;
         }
-        else
+        else if(isDead == false)
         {
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.gray;
@@ -219,12 +219,15 @@ public class Enemy : MonoBehaviour
             switch (enemyType)
             {
                 case Type.A:
+                    Debug.Log("A");
                     manager.enemyCntA--;
                     break;
                 case Type.B:
+                    Debug.Log("B");
                     manager.enemyCntB--;
                     break;
                 case Type.C:
+                    Debug.Log("C");
                     manager.enemyCntC--;
                     break;
                 case Type.D:
